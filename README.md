@@ -37,48 +37,7 @@ Five open-weight LLMs are benchmarked head-to-head on a public SRS dataset, eval
 
 ## 🏗️ Pipeline
 
-```
-┌──────────────────────────────────────────────────────┐
-│               SRS Document (PDF)                     │
-└───────────────────────┬──────────────────────────────┘
-                        │
-                        ▼
-              ┌──────────────────┐
-              │  PDF Text        │
-              │  Extraction      │
-              │  (PyPDF2)        │
-              └────────┬─────────┘
-                       │
-                       ▼
-              ┌──────────────────┐
-              │  Stage 1:        │
-              │  Base Prompt →   │
-              │  Refined Prompt  │  ← LLM refines its own prompt
-              └────────┬─────────┘
-                       │
-                       ▼
-         ┌─────────────────────────────┐
-         │  Stage 2: Iterative UAT     │
-         │  Generation (up to 10       │
-         │  cycles with early stop)    │
-         └─────────────┬───────────────┘
-                       │
-                       ▼
-         ┌─────────────────────────────┐
-         │  Deduplication              │
-         │  (SequenceMatcher, t=0.5)   │
-         └─────────────┬───────────────┘
-                       │
-                       ▼
-         ┌─────────────────────────────┐
-         │  Evaluation                 │
-         │  • BERTScore                │
-         │  • Lexical Similarity       │
-         │  • LLM-as-a-Judge           │
-         │  • Coverage Heatmap         │
-         │  • Word Clouds              │
-         └─────────────────────────────┘
-```
+![Image](UAT.png)
 
 ---
 
